@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Landoretti Art</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,43 +29,63 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="{{ asset('storage/images/landoretti_logo.png') }}" class="logo">
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- top bit of navbar (profile, ...) -->
+                <div class="collapse navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @guest
+                        <li><a href="{{ route('register') }}">REGISTER</a></li>
+                        <li><a href="{{ route('login') }}">LOGIN</a></li>
+                        @else
+                        <li><a href="#">WATCHLIST</a></li>
+                        <li><a href="#">PROFILE</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                LOGOUT
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                        @endguest
                         &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <li>
+                            <input class="form-control input-sm" id="searchinput" type="text">
+                        </li>
+                        <li><a href="#">SEARCH</a></li>
+                    </ul>
+                </div>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                <!-- bottom bit of navbar -->
+                <div class="collapse navbar-collapse navbar-bot" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">ART</a></li>
+                        <li><a href="#">ISEARCH</a></li>
+                        <li><a href="#">MYAUCTIONS</a></li>
+                        <li><a href="#">MYBIDS</a></li>
+                        <li><a href="#">CONTACT</a></li>
+                        &nbsp;
+                    </ul>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Language Settings -->
+                        <li><a href="#">NL</a></li>
+                        <li><a href="#">FR</a></li>
+                        <li><a href="#">EN</a></li>
                     </ul>
                 </div>
             </div>
