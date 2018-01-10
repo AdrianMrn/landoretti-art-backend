@@ -11,6 +11,16 @@
             </div>
 
             <!-- future: complete errors (in alert box w/ red background)  -->
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                <div class="row marginbelow">
+                    <div class="row-md-12">
+                        <div class="alert alert-danger"><strong>{{ $error }}</strong></div>
+                    </div>
+                </div>
+                @endforeach
+            @endif
+
             @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('name') }}</strong>
@@ -68,12 +78,6 @@
             @if ($errors->has('vatnumber'))
                 <span class="help-block">
                     <strong>{{ $errors->first('vatnumber') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('terms'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('terms') }}</strong>
                 </span>
             @endif
 

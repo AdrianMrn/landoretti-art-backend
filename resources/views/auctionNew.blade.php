@@ -11,79 +11,22 @@
             </div>
 
             <!-- future: complete errors (in alert box w/ red background) -->
-            <!-- (in col-md-9 instead of col-md-12!!!) -->
-            @if ($errors->has('name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
-                </span>
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                <div class="row">
+                    <div class="row-md-9">
+                        <div class="alert alert-danger"><strong>{{ $error }}</strong></div>
+                    </div>
+                </div>
+                @endforeach
             @endif
 
-            @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('password'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('country'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('country') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('zipcode'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('zipcode') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('city'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('city') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('address'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('address') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('phone'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('phone') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('accountnumber'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('accountnumber') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('vatnumber'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('vatnumber') }}</strong>
-                </span>
-            @endif
-
-            @if ($errors->has('terms'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('terms') }}</strong>
-                </span>
-            @endif
-
-            <form method="POST" action="{{ url('auction') }}">
+            <form method="POST" action="{{ url('auction') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row marginbelow">
                     <div class="col-md-6">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <select class="form-control" id="style"  value="{{ old('style') }}" required autofocus>
+                            <select class="form-control" id="style" name="style" required autofocus>
                                 <option value="" disabled selected>Style</option>
                                 @foreach ($styles as $style)
                                     <option>{{ $style->name }}</option>
@@ -113,21 +56,21 @@
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('width') ? ' has-error' : '' }}">
                             <label for="width" class="control-label">Width</label>
-                            <input id="width" placeholder="XXXX" type="text" class="form-control" name="width" required>
+                            <input id="width" placeholder="XXXX" type="number" class="form-control" name="width" value="{{ old('width') }}" required>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('height') ? ' has-error' : '' }}">
                             <label for="height" class="control-label">Height</label>
-                            <input id="height" placeholder="XXXX" type="text" class="form-control" name="height" required>
+                            <input id="height" placeholder="XXXX" type="number" class="form-control" name="height" value="{{ old('height') }}" required>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('depth') ? ' has-error' : '' }}">
                             <label for="depth" class="control-label">Depth (optional)</label>
-                            <input id="depth" placeholder="XXXX" type="text" class="form-control" name="depth" required>
+                            <input id="depth" placeholder="XXXX" type="number" class="form-control" name="depth" value="{{ old('depth') }}">
                         </div>
                     </div>
                 </div>
@@ -136,7 +79,7 @@
                     <div class="col-md-9">
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="control-label">Description</label>
-                            <textarea id="description" placeholder="Describe your auction as thoroughly as possible" type="text" class="form-control" name="description" value="{{ old('description') }}" required></textarea>
+                            <textarea id="description" placeholder="Describe your auction as thoroughly as possible" type="text" class="form-control" name="description" required>{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -145,27 +88,49 @@
                     <div class="col-md-9">
                         <div class="form-group{{ $errors->has('condition') ? ' has-error' : '' }}">
                             <label for="condition" class="control-label">Condition</label>
-                            <textarea id="condition" placeholder="What is the condition of the artwork?" type="text" class="form-control" name="condition" value="{{ old('condition') }}" required></textarea>
+                            <textarea id="condition" placeholder="What is the condition of the artwork?" type="text" class="form-control" name="condition" required>{{ old('condition') }}</textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="row marginbelow">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="form-group{{ $errors->has('origin') ? ' has-error' : '' }}">
                             <label for="origin" class="control-label">Origin</label>
-                            <input id="origin" placeholder="What is the origin of the artwork?" type="text" class="form-control" name="origin" required>
+                            <input id="origin" placeholder="What is the origin of the artwork?" type="text" class="form-control" name="origin" value="{{ old('origin') }}" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="row marginbelow">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="form-group{{ $errors->has('photos') ? ' has-error' : '' }}">
-                            <label for="origin" class="control-label">Photos</label>
-                            <p>Please upload one picture with the signature of the artwork and one picture of the artwork itself.</p>
-                            <p>You can upload up to 3 pictures with a maximum of 10MB each.</p>
-                            future: image uploads
+                            <label class="control-label">Photos</label>
+                            <p>Please upload one picture with the signature of the artwork and one picture of the artwork itself.<br>
+                            You can upload up to 3 pictures with a maximum of 10MB each.<br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row marginbelow">
+                    <div class="col-md-3">
+                        <div class="form-group{{ $errors->has('imageSignature') ? ' has-error' : '' }}">
+                            <label class="btn btn-info">
+                                Upload image of the artwork <input type="file" id="imageSignature" name="imageSignature" value="{{ old('imageSignature') }}" hidden>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group{{ $errors->has('imageArtwork') ? ' has-error' : '' }}">
+                            <label class="btn btn-info">
+                                Upload image of the signature <input type="file" id="imageArtwork" name="imageArtwork" value="{{ old('imageArtwork') }}" hidden>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group{{ $errors->has('imageOptional') ? ' has-error' : '' }}">
+                            <label class="btn btn-info">
+                                Optional image <input type="file" id="imageOptional" name="imageOptional" value="{{ old('imageOptional') }}" hidden>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -175,21 +140,21 @@
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('priceMinEst') ? ' has-error' : '' }}">
                             <label for="priceMinEst" class="control-label">Minimum estimated price</label>
-                            <input id="priceMinEst" placeholder="XXXX" type="text" class="form-control" name="priceMinEst" required>
+                            <input id="priceMinEst" placeholder="XXXX" type="number" class="form-control" name="priceMinEst" value="{{ old('priceMinEst') }}" required>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('priceMaxEst') ? ' has-error' : '' }}">
                             <label for="priceMaxEst" class="control-label">Maximum estimated price</label>
-                            <input id="priceMaxEst" placeholder="XXXX" type="text" class="form-control" name="priceMaxEst" required>
+                            <input id="priceMaxEst" placeholder="XXXX" type="number" class="form-control" name="priceMaxEst" value="{{ old('priceMaxEst') }}" required>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('priceBuyout') ? ' has-error' : '' }}">
                             <label for="priceBuyout" class="control-label">Buyout price (optional)</label>
-                            <input id="priceBuyout" placeholder="XXXX" type="text" class="form-control" name="priceBuyout" required>
+                            <input id="priceBuyout" placeholder="XXXX" type="number" class="form-control" name="priceBuyout" value="{{ old('priceBuyout') }}">
                         </div>
                     </div>
                 </div>
@@ -198,7 +163,7 @@
                     <div class="col-md-3">
                         <div class="form-group{{ $errors->has('endDate') ? ' has-error' : '' }}">
                             <label for="endDate" class="control-label">End date</label>
-                            <input id="endDate" placeholder="DD/MM/YY" type="text" class="form-control" name="endDate" required>
+                            <input id="endDate" placeholder="YYYY/MM/DD" type="text" class="form-control" name="endDate" value="{{ old('endDate') }}" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -228,8 +193,8 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-4 offset-md-1">
+                <div class="row marginbelow">
+                    <div class="col-md-4 col-md-offset-1">
                         <a href="#">ASK A QUESTION ></a>
                     </div>
                 </div>

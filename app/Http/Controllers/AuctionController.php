@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Auction, App\Style;
 
@@ -42,7 +43,69 @@ class AuctionController extends Controller
    */
   public function store(Request $request)
   {
+    /* dd($request->style); */
+
+    $this->validate($request, [
+      'style' => 'required|string|max:255',
+      'title' => 'required|string|max:255',
+      'year' => 'required|integer',
+      'width' => 'required|integer',
+      'height' => 'required|integer',
+      'depth' => 'nullable|integer',
+      'description' => 'required|string',
+      'condition' => 'required|string',
+      'origin' => 'required|string',
+      'priceMinEst' => 'required|integer',
+      'priceMaxEst' => 'required|integer',
+      'priceBuyout' => 'nullable|integer',
+      'endDate' => 'required|date_format:Y/m/d',
+      'imageSignature' => 'required|image|max:10240',
+      'imageArtwork' => 'required|image|max:10240',
+      'imageOptional' => 'nullable|image|max:10240',
+    ]);
+
+    $imageSignature = $request->imageSignature;
+    $imageArtwork = $request->imageArtwork;
+    $imageOptional = $request->imageOptional;
+
+    $timestamp = Carbon::now()->timestamp;
+
+    $imageSignatureTitle = $timestamp . $imageSignature->getClientOriginalName();
+    $imageArtworkTitle = $timestamp . $imageArtwork->getClientOriginalName();
     
+    $imageSignature->move('uploads', $imageSignatureTitle);
+    $imageArtwork->move('uploads', $imageArtworkTitle);
+    $imageOptionalUrl = null;
+    if (isset($request->imageOptional))
+    {
+      $imageOptionalTitle = $timestamp . $imageOptional->getClientOriginalName();
+      $imageOptional->move('uploads', $imageOptionalTitle);
+      $imageOptionalUrl = 'uploads/' . $imageOptionalTitle;
+    }
+
+    Auction::create([
+      'userId' => \Auth::id(),
+      'style' => $request->style,
+      'title' => $request->title,
+      'year' => $request->year,
+      'width' => $request->width,
+      'height' => $request->height,
+      'depth' => $request->depth,
+      'description' => $request->description,
+      'condition' => $request->condition,
+      'origin' => $request->origin,
+      'priceMinEst' => $request->priceMinEst,
+      'priceMaxEst' => $request->priceMaxEst,
+      'priceBuyout' => $request->priceBuyout,
+      'endDate' => $request->endDate,
+      'boughtBy' => $request->boughtBy,
+      'imageSignature' => 'uploads/' . $imageSignatureTitle,
+      'imageArtwork' => 'uploads/' . $imageArtworkTitle,
+      'imageOptional' => $imageOptionalUrl,
+    ]);
+
+    dd("nice");
+    //redirect user to newly made auction page
   }
 
   /**

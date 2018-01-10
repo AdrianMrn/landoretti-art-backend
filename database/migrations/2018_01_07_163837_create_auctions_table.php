@@ -17,16 +17,19 @@ class CreateAuctionsTable extends Migration {
 			$table->integer('year');
 			$table->integer('width');
 			$table->integer('height');
-			$table->integer('depth')->nullable()->default('0');
+			$table->integer('depth')->nullable()->default(null);
 			$table->text('description');
 			$table->text('condition');
 			$table->text('origin');
 			$table->integer('priceMinEst');
 			$table->integer('priceMaxEst');
 			$table->integer('priceBuyout')->nullable()->default(null);
-			$table->datetime('endDate');
-			$table->string('status')->default('pending');
-			$table->string('boughtBy')->nullable();
+			$table->date('endDate');
+			$table->string('status')->default('active');
+			$table->string('boughtBy')->nullable()->default(null);
+			$table->string('imageSignature');
+			$table->string('imageArtwork');
+			$table->string('imageOptional')->nullable()->default(null);
 		});
 	}
 

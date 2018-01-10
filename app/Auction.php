@@ -15,6 +15,8 @@ class Auction extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $guarded = ['id'];
+
     public function auctionPhotos()
     {
         return $this->hasMany('Photo');

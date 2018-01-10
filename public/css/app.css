@@ -30,3 +30,7 @@
 .loginpadding {
     padding-top: 14px;
 }
+
+[hidden] {
+    opacity: 0 !important;
+}
