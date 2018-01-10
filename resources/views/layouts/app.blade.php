@@ -90,7 +90,9 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
+            breadcrumb <!-- future: complete this -->
+        </div>
         @yield('content')
     </div>
 
