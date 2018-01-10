@@ -13,7 +13,7 @@ class CreateAuctionsTable extends Migration {
 			$table->softDeletes();
 			$table->integer('userId')->unsigned();
 			$table->string('style');
-			$table->string('title');
+			$table->string('title')->unique();
 			$table->integer('year');
 			$table->integer('width');
 			$table->integer('height');

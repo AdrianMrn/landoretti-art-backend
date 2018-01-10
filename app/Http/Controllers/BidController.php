@@ -34,7 +34,7 @@ class BidController extends Controller
    */
   public function store(Request $request)
   {
-    
+    dd("bid placed");
   }
 
   /**

@@ -47,7 +47,7 @@ class AuctionController extends Controller
 
     $this->validate($request, [
       'style' => 'required|string|max:255',
-      'title' => 'required|string|max:255',
+      'title' => 'required|string|max:255|unique:auctions',
       'year' => 'required|integer',
       'width' => 'required|integer',
       'height' => 'required|integer',
@@ -114,9 +114,10 @@ class AuctionController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show($title)
   {
-    
+    $auction = Auction::where('title', $title)->first();
+    return view('auctionDetail')->with('auction', $auction);
   }
 
   /**

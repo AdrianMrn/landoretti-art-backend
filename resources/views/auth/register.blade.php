@@ -20,7 +20,7 @@
                 </div>
                 @endforeach
             @endif
-
+<!-- 
             @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('name') }}</strong>
@@ -80,7 +80,7 @@
                     <strong>{{ $errors->first('vatnumber') }}</strong>
                 </span>
             @endif
-
+ -->
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
                 <div class="row marginbelow">

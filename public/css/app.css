@@ -34,3 +34,44 @@
 [hidden] {
     opacity: 0 !important;
 }
+
+.auction-sidebar {
+    text-align: right;
+}
+.auction-sidebar div {
+    margin-right: 0px;
+}
+
+.bid-box {
+    border: 1px solid gray;
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+.add-to-watchlist {
+    display: block;
+    margin: 10px;
+    text-align: center;
+}
+
+.img-center {
+    margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.bg-black {
+    border: 1px solid black;
+}
+
+.auction-info {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid gray;
+}
+
+.auction-title {
+    margin-top: 0px;
+}
