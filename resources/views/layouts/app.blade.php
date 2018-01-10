@@ -39,7 +39,21 @@
                     <ul class="nav navbar-nav">
                         @guest
                         <li><a href="{{ route('register') }}">REGISTER</a></li>
-                        <li><a href="{{ route('login') }}">LOGIN</a></li>
+                        <!-- <li><a href="{{ route('login') }}">LOGIN</a></li> -->
+
+                        <form method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
+                            <div class="col-md-4 loginpadding">
+                                <input id="email" placeholder="user" type="email" class="form-control input-sm" name="email" value="{{ old('email') }}" required>
+                            </div>
+                            <div class="col-md-4 loginpadding">
+                                <input id="password" placeholder="password" type="password" class="form-control input-sm" name="password" required>
+                            </div>
+                            <div class="col-md-1 loginpadding">
+                                <button type="submit" class="btn-sm btn-primary">></button>
+                            </div>
+                        </form>
+
                         @else
                         <li><a href="#">WATCHLIST</a></li>
                         <li><a href="#">PROFILE</a></li>
@@ -61,9 +75,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <input class="form-control input-sm" id="searchinput" type="text">
+                            <input class="form-control input-sm" placeholder="Search" id="searchinput" type="text">
                         </li>
-                        <li><a href="#">SEARCH</a></li>
+                        <li><a href="#">SEARCH</a></li> <!-- future: magnifying glass -->
                     </ul>
                 </div>
 

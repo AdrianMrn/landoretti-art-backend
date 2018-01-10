@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- fix below -->
+
                 <div class="row marginbelow">
                     <div class="col-md-6">
                         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
@@ -184,7 +184,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
-                                Register
+                                REGISTER
                             </button>
                         </div>
                     </div>

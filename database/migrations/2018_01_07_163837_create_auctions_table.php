@@ -23,7 +23,7 @@ class CreateAuctionsTable extends Migration {
 			$table->text('origin');
 			$table->integer('priceMinEst');
 			$table->integer('priceMaxEst');
-			$table->integer('priceBuyout');
+			$table->integer('priceBuyout')->nullable()->default(null);
 			$table->datetime('endDate');
 			$table->string('status')->default('pending');
 			$table->string('boughtBy')->nullable();
