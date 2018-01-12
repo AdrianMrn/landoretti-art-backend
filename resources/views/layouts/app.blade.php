@@ -55,7 +55,7 @@
                         </form>
 
                         @else
-                        <li><a href="#">WATCHLIST</a></li>
+                        <li><a href="{{ url('watchlist') }}">WATCHLIST</a></li>
                         <li><a href="#">PROFILE</a></li>
                         <li>
                             <a href="{{ route('logout') }}"

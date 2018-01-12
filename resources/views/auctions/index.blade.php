@@ -5,7 +5,7 @@
 @endsection
 
 @section('pagination')
-{{ $auctions->links() }}
+    {{ $auctions->links() }}
 @endsection
 
 @section('content')
@@ -16,15 +16,13 @@
         </div>
     </div> -->
 
-    
-
     <div class="row marginbelow">
         <div class="col-md-12">
             <div class="auctionlist bigitem">big</div>
 
             @foreach ($auctions as $auction)
                 <div class="auctionlist smallitem">
-                    <div class="auctionlist-image" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
+                    <div class="auctionlist-image" title="$auction->title" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
                     <div class="auctionlist-info">
                         <p class="auctionyear">{{ $auction->year }}</p>
                         <p class="auctiontitle">{{ $auction->title }}</p>

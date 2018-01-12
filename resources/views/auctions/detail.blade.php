@@ -34,13 +34,13 @@
             <div class="row marginbelow">
                 <div class="col-md-7">
                     <div class="row marginbelow">
-                        <div class="col-md-12 auction-detail-img auction-detail-img-big" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
+                        <div class="col-md-12 auction-detail-img auction-detail-img-big" title="{{ $auction->title }}" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
-                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageSignature) }}');"></div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" title="{{ $auction->title }}" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" title="{{ $auction->title }} signature" style="background-image: url('{{ asset($auction->imageSignature) }}');"></div>
                         @if ($auction->imageOptional)
-                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageOptional) }}');"></div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" title="{{ $auction->title }}" style="background-image: url('{{ asset($auction->imageOptional) }}');"></div>
                         @endif
                     </div>
                 </div>

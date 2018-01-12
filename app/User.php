@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Auction;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,5 +42,16 @@ class User extends Authenticatable
     public function searches()
     {
         return $this->hasMany('ISearch');
+    }
+
+    public function watchlistItems()
+    {
+        $itemIds = $this->hasMany('App\WatchlistItem', 'userId')->get();
+        $watchlistItems = [];
+        foreach ($itemIds as $item)
+        {
+            array_push($watchlistItems, Auction::where('id', $item->auctionId)->first());
+        }
+        return $watchlistItems;
     }
 }

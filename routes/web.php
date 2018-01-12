@@ -25,4 +25,4 @@ Route::resource('photo', 'PhotoController');
 Route::resource('style', 'StyleController');
 Route::resource('isearch', 'ISearchController');
 Route::resource('bid', 'BidController');
-Route::resource('watchlistitem', 'WatchlistItemController');
+Route::resource('watchlist', 'WatchlistItemController');

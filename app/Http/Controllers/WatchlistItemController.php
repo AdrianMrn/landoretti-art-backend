@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class WatchlistItemController extends Controller 
 {
 
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   /**
    * Display a listing of the resource.
    *
@@ -14,7 +19,9 @@ class WatchlistItemController extends Controller
    */
   public function index()
   {
-    
+    $watchlistItems = \Auth::user()->watchlistItems(); /* future: apply filter to this (active/ended) */
+
+    return view('watchlist.index', ['watchlistItems' => $watchlistItems]);
   }
 
   /**

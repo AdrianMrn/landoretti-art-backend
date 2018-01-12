@@ -5,14 +5,20 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push('Home', route('home'));
 });
 
-// Home > Blog
+// Home > Auctions
 Breadcrumbs::register('auctions', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Auctions', url('auctions'));
 });
 
-// Home > Blog > [auction]
+// Home > Auctions > [auction]
 Breadcrumbs::register('auction', function ($breadcrumbs, $auction) {
     $breadcrumbs->parent('auctions');
     $breadcrumbs->push($auction->title, url('auctions', $auction->title));
+});
+
+// Home > Watchlist
+Breadcrumbs::register('watchlist', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Watchlist', url('watchlist'));
 });
