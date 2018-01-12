@@ -105,7 +105,11 @@
             </div>
         </nav>
         <div class="container">
-            breadcrumb <!-- future: complete this -->
+            <div class="row marginbelow">
+                <div class="col-md-4">
+                    breadcrumb <!-- future: complete this -->
+                </div>
+            </div>
         </div>
         @yield('content')
     </div>

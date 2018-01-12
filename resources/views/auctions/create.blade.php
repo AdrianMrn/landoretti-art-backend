@@ -21,7 +21,7 @@
                 @endforeach
             @endif
 
-            <form method="POST" action="{{ url('auction') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('auctions') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row marginbelow">
                     <div class="col-md-6">

@@ -11,9 +11,9 @@ class AuctionController extends Controller
 {
 
   public function __construct()
-    {
-      $this->middleware('auth', ['except' => ['index','show']]);
-    }
+  {
+    $this->middleware('auth', ['except' => ['index','show']]);
+  }
 
   /**
    * Display a listing of the resource.
@@ -22,7 +22,9 @@ class AuctionController extends Controller
    */
   public function index()
   {
-    
+    $auctions = Auction::where('status', 'active')->orderBy('created_at')->paginate(8);
+
+    return view('auctions.index', ['auctions' => $auctions]);
   }
 
   /**
@@ -33,7 +35,7 @@ class AuctionController extends Controller
   public function create()
   {
     $styles = Style::orderBy('name')->get();
-    return view('auctionNew')->with('styles', $styles);
+    return view('auctions.create')->with('styles', $styles);
   }
 
   /**
@@ -117,7 +119,7 @@ class AuctionController extends Controller
   public function show($title)
   {
     $auction = Auction::where('title', $title)->first();
-    return view('auctionDetail')->with('auction', $auction);
+    return view('auctions.detail')->with('auction', $auction);
   }
 
   /**

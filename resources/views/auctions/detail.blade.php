@@ -30,21 +30,13 @@
             <div class="row marginbelow">
                 <div class="col-md-7">
                     <div class="row marginbelow">
-                        <div class="col-md-12 bg-black">
-                            <img class="img-center" src="{{ asset('') . $auction->imageArtwork }}" height="300">                            
-                        </div>
+                        <div class="col-md-12 auction-detail-img auction-detail-img-big" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 bg-black">
-                            <img class="img-center" src="{{ asset('') . $auction->imageArtwork }}" height="150">
-                        </div>
-                        <div class="col-md-4 bg-black">
-                            <img class="img-center" src="{{ asset('') . $auction->imageSignature }}" height="150">
-                        </div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageSignature) }}');"></div>
                         @if ($auction->imageOptional)
-                        <div class="col-md-4 bg-black">
-                            <img class="img-center" src="{{ asset('') . $auction->imageOptional }}" height="150">
-                        </div>
+                        <div class="col-md-4 auction-detail-img auction-detail-img-small" style="background-image: url('{{ asset($auction->imageOptional) }}');"></div>
                         @endif
                     </div>
                 </div>
@@ -56,10 +48,10 @@
                         <span>{{ $auction->year }}</span>
                     </div><hr>
                     <div class="row">
-                        timeleft
+                        <span class="auctiondetail-timeleft">{{ $auction->timeleft() }} left</span>
                     </div>
                     <div class="row">
-                        {{ $auction->endDate }}
+                        <span>{{ $auction->endDate }}</span>
                     </div><hr>
                     <div class="row marginbelow">
                         <p>If you wish to bid on this auction, enter your bid amount below and press BID NOW.</p>

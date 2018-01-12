@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 }); */
 
-Route::resource('auction', 'AuctionController');
+Route::resource('auctions', 'AuctionController');
 Route::resource('photo', 'PhotoController');
 Route::resource('style', 'StyleController');
 Route::resource('isearch', 'ISearchController');
