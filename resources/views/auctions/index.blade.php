@@ -8,6 +8,8 @@
         </div>
     </div> -->
 
+    <div class="pull-right">{{ $auctions->links() }}</div>
+
     <div class="row marginbelow">
         <div class="col-md-12">
             <div class="auctionlist bigitem">big</div>
@@ -29,6 +31,8 @@
             @endforeach
         </div>
     </div>
+
+    <div class="pull-right">{{ $auctions->links() }}</div>
 
 </div>
 @endsection

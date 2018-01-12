@@ -98,7 +98,7 @@
 
 .auctionlist.bigitem {
     width: 50%;
-    height: 400px;
+    height: 620px;
     float: left;
 }
 
@@ -110,6 +110,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    margin-bottom: 20px;
 }
 
 .auctionlist-image {
