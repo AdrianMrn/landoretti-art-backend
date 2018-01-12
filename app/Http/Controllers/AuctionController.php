@@ -45,8 +45,6 @@ class AuctionController extends Controller
    */
   public function store(Request $request)
   {
-    /* dd($request->style); */
-
     $this->validate($request, [
       'style' => 'required|string|max:255',
       'title' => 'required|string|max:255|unique:auctions',

@@ -85,11 +85,13 @@
                 <div class="collapse navbar-collapse navbar-bot" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">ART</a></li>
+                        <li><a href="{{ route('home') }}">HOME</a></li>
+                        <li><a href="{{ url('auctions') }}">ART</a></li>
                         <li><a href="#">ISEARCH</a></li>
+                        @if (Auth::check())
                         <li><a href="#">MYAUCTIONS</a></li>
                         <li><a href="#">MYBIDS</a></li>
+                        @endif
                         <li><a href="#">CONTACT</a></li>
                         &nbsp;
                     </ul>
@@ -106,8 +108,11 @@
         </nav>
         <div class="container">
             <div class="row marginbelow">
-                <div class="col-md-4">
-                    breadcrumb <!-- future: complete this -->
+                <div class="col-md-6">
+                    @yield('breadcrumb')
+                </div>
+                <div class="col-md-6">
+                    <span class="pull-right">@yield('pagination')</span>
                 </div>
             </div>
         </div>

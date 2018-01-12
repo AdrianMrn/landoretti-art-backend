@@ -10,4 +10,6 @@ class WatchlistItem extends Model
     protected $table = 'watchlistItems';
     public $timestamps = true;
 
+    protected $guarded = ['id'];
+
 }

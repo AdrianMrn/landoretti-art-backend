@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    {{ Breadcrumbs::render('auctions') }}
+@endsection
+
+@section('pagination')
+{{ $auctions->links() }}
+@endsection
+
 @section('content')
 <div class="container">
     <!-- <div class="row">
@@ -8,7 +16,7 @@
         </div>
     </div> -->
 
-    <div class="pull-right">{{ $auctions->links() }}</div>
+    
 
     <div class="row marginbelow">
         <div class="col-md-12">

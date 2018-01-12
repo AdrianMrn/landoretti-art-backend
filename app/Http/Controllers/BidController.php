@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Bid, App\Auction;
+
 class BidController extends Controller 
 {
 
@@ -39,7 +41,31 @@ class BidController extends Controller
    */
   public function store(Request $request)
   {
-    dd("bid placed");
+    $this->validate($request, [
+      'amount' => 'required|integer',
+      'auctionid' => 'required|integer',
+    ]);
+
+    $auction = Auction::where('id', $request->auctionid)->first();
+    // only allow bidding on active auctions
+    if (!$auction->isActive())
+    {
+      return back();
+    }
+
+    // check if bid is higher than current highest bid
+    if ($request->amount < $auction->highestBidAmount())
+    {
+      return back()->withErrors(['Your bid must be higher than the current highest bid.']);
+    }
+
+    Bid::create([
+      'userId' => \Auth::id(),
+      'auctionId' => $request->auctionid,
+      'amount' => $request->amount,
+    ]);
+
+    return back();
   }
 
   /**

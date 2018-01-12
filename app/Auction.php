@@ -19,14 +19,19 @@ class Auction extends Model
 
     protected $guarded = ['id'];
 
-    public function auctionPhotos()
-    {
-        return $this->hasMany('Photo');
-    }
-
     public function owner()
     {
         return $this->belongsTo('User', 'userId');
+    }
+
+    public function amountOfBids()
+    {
+        return $this->hasMany('App\Bid', 'auctionId')->count();
+    }
+
+    public function highestBidAmount()
+    {
+        return Bid::where('auctionId', $this->id)->max('amount');
     }
 
     public function bids()
@@ -46,6 +51,16 @@ class Auction extends Model
         $d = floor(($timeToEnd%2592000)/86400);
 
         return $d . 'd ' . $h . 'h ' . $m . 'm';
+    }
+
+    public function isActive()
+    {
+        if ($this->status == 'active')
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

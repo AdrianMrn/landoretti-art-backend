@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    {{ Breadcrumbs::render('auction', $auction) }}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <h2>{{ $auction->title }}</h2>
                 </div>
             </div>
             <div class="row marginbelow">
-                <div class="col-md-4">
-                    <span>timeleft + (amount of bids) + add to watchlist</span>
+                <div class="col-md-12">
+                    <span>{{ $auction->timeleft() }} &nbsp ({{ $auction->amountOfBids() }} bids) &nbsp add to watchlist</span>
                 </div>
             </div>
             
@@ -62,12 +66,14 @@
                         @if ($auction->priceBuyout)
                         <a href="#" >Buy now for €{{ $auction->priceBuyout }}</a> <!-- future: link to thank you page -->
                         @endif<br><br>
-                        <span>bids: </span> <!-- future: add amount of bids -->
+                        <span class="pull-left">Current highest bid: {{$auction->highestBidAmount()}}</span>
+                        <span>bids: {{ $auction->amountOfBids() }} </span> <!-- future: add amount of bids -->
                         
                         <form class="form-inline" method="POST" action="{{ url('bid') }}">
                             {{ csrf_field() }}
+                            <input type="hidden" id="auctionid" name="auctionid" value="{{ $auction->id }}">
                             <div class="form-group mb-2">
-                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" required>
+                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->highestBidAmount() + 5 }}" required>
                             </div>
                             <button type="submit" class="btn">BID NOW ></button>
                         </form>
