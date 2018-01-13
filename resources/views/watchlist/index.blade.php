@@ -51,7 +51,7 @@
                             <td><input class="form-check-input" type="checkbox" name="delete_items[]" value="{{ $item->id }}" id="{{ $item->id }}"></td>
                             <td class="watchlist-image"><a href="{{ url('auctions', [$item->title]) }}"><img src="{{ $item->imageArtwork }}" alt="{{ $item->title }}"></a></td>
                             <td><p class="auctiontitle"><a href="{{ url('auctions', [$item->title]) }}">{{ $item->title }}</a></p><p class="auctionyear">{{ $item->year }}</p></td>
-                            <td>{{ $item->priceMinEst }}</td>
+                            <td>€ {{ $item->estimatedPrice() }}</td>
                             <td>{{ $item->endDateFormatted() }}</td>
                             <td>{{ $item->timeleft() }}</td>
                         </tr>

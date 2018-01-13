@@ -26,7 +26,7 @@
                     <div class="auctionlist-info">
                         <p class="auctionyear">{{ $auction->year }}</p>
                         <p class="auctiontitle">{{ $auction->title }}</p>
-                        <p class="auctionprice">€ {{ $auction->priceMinEst }}</p>
+                        <p class="auctionprice">€ {{ $auction->estimatedPrice() }}</p>
                         <p class="time-and-price">
                             <span>{{ $auction->timeleft() }}</span>
                             <a href="{{ url('auctions', [$auction->title]) }}" class="pull-right">VISIT AUCTION ></a>

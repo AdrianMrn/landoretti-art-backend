@@ -29,7 +29,7 @@
                             <select class="form-control" id="style" name="style" required autofocus>
                                 <option value="" disabled selected>Style</option>
                                 @foreach ($styles as $style)
-                                    <option>{{ $style->name }}</option>
+                                    <option value="{{ $style->name }}" {{ (old('style') == $style->name ? 'selected':'') }}>{{ $style->name }}</option>
                                 @endforeach
                             </select>
                         </div>

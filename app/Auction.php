@@ -72,4 +72,9 @@ class Auction extends Model
     {
         return date('l jS \of F Y h:i:s A', strtotime($this->endDate));
     }
+
+    public function estimatedPrice()
+    {
+        return (($this->priceMinEst + $this->priceMaxEst)/2);
+    }  
 }

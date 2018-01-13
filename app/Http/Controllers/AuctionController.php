@@ -64,6 +64,24 @@ class AuctionController extends Controller
       'imageOptional' => 'nullable|image|max:10240',
     ]);
 
+    //extra validation
+    if (strtotime($request->endDate) < Carbon::now()->timestamp)
+    {
+      return back()->withErrors(['The end date must be in the future.'])->withInput();
+    }
+    if ($request->priceMaxEst < $request->priceMinEst)
+    {
+      return back()->withErrors(['The maximum estimated price must be higher than the minimum estimated price.'])->withInput();
+    } 
+    if ($request->priceBuyout < $request->priceMaxEst)
+    {
+      return back()->withErrors(['The buyout price must be higher than the maximum estimated price.'])->withInput();
+    } 
+    if ($request->year > Carbon::now()->year)
+    {
+      return back()->withErrors(['The artwork probably was not made in the future, check again.'])->withInput();
+    } 
+
     $imageSignature = $request->imageSignature;
     $imageArtwork = $request->imageArtwork;
     $imageOptional = $request->imageOptional;
@@ -104,7 +122,7 @@ class AuctionController extends Controller
       'imageOptional' => $imageOptionalUrl,
     ]);
 
-    return redirect()->url('auctions', ['id' => $request->title]);
+    return redirect()->route('auctions.show', ['title' => $request->title]);
   }
 
   /**
