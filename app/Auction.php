@@ -63,4 +63,9 @@ class Auction extends Model
         }
     }
 
+    public function endDateFormatted()
+    {
+        return date('l jS \of F Y h:i:s A', strtotime($this->endDate));
+    }
+
 }

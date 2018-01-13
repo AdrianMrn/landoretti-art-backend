@@ -6,6 +6,11 @@
 
 @section('content')
 <div class="container">
+    <form id="toggle-watchlist" method="POST" action="{{ url('watchlist') }}">
+        {{ csrf_field() }}
+        <input type="hidden" id="auctionId" name="auctionId" value="{{ $auction->id }}">
+    </form>
+
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -15,7 +20,15 @@
             </div>
             <div class="row marginbelow">
                 <div class="col-md-12">
-                    <span>{{ $auction->timeleft() }} &nbsp ({{ $auction->amountOfBids() }} bids) &nbsp add to watchlist</span>
+                    <span>
+                        {{ $auction->timeleft() }} &nbsp 
+                        ({{ $auction->amountOfBids() }} bids) &nbsp 
+                        @if (!$onWatchlist)
+                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">ADD TO WATCHLIST ></button>
+                        @else
+                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">REMOVE FROM WATCHLIST ></button>
+                        @endif
+                    </span>
                 </div>
             </div>
             
@@ -55,7 +68,7 @@
                         <span class="auctiondetail-timeleft">{{ $auction->timeleft() }} left</span>
                     </div>
                     <div class="row">
-                        <span>{{ $auction->endDate }}</span>
+                        <span>{{ $auction->endDateFormatted() }}</span>
                     </div><hr>
                     <div class="row marginbelow">
                         <p>If you wish to bid on this auction, enter your bid amount below and press BID NOW.</p>
@@ -71,14 +84,18 @@
                         
                         <form class="form-inline" method="POST" action="{{ url('bid') }}">
                             {{ csrf_field() }}
-                            <input type="hidden" id="auctionid" name="auctionid" value="{{ $auction->id }}">
+                            <input type="hidden" id="auctionId" name="auctionId" value="{{ $auction->id }}">
                             <div class="form-group mb-2">
                                 <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->highestBidAmount() + 5 }}" required>
                             </div>
                             <button type="submit" class="btn">BID NOW ></button>
                         </form>
 
-                        <a class="add-to-watchlist" href="#">Add to my watchlist</a>
+                        @if (!$onWatchlist)
+                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">ADD TO WATCHLIST ></button>
+                        @else
+                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">REMOVE FROM WATCHLIST ></button>
+                        @endif
 
                     </div>
                 </div>

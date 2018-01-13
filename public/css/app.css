@@ -27,6 +27,10 @@
     margin-bottom: 10px;
 }
 
+.marginleft {
+    margin-left: 10px;
+}
+
 .loginpadding {
     padding-top: 14px;
 }
@@ -163,3 +167,32 @@ h2 {
     font-size: 50px !important;
     margin-top: 0 !important;
 }
+
+.table {
+    text-align: center !important;
+}
+
+.table thead tr th {
+    text-align: center !important;
+}
+
+.watchlist-table-body td {
+    vertical-align: middle !important;
+}
+
+.watchlist-image {
+    padding: 0 !important;
+    width: 100px;
+}
+
+.watchlist-image img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.table .thead-light th {
+    color: #495057;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }

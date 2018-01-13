@@ -26,3 +26,5 @@ Route::resource('style', 'StyleController');
 Route::resource('isearch', 'ISearchController');
 Route::resource('bid', 'BidController');
 Route::resource('watchlist', 'WatchlistItemController');
+
+Route::post('/watchlist/clear', 'WatchlistItemController@clear')->name('clearWatchlist');

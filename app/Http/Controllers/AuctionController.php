@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-use App\Auction, App\Style;
+use App\Auction, App\Style, App\WatchlistItem;
 
 class AuctionController extends Controller 
 {
@@ -104,8 +104,7 @@ class AuctionController extends Controller
       'imageOptional' => $imageOptionalUrl,
     ]);
 
-    dd("nice");
-    //redirect user to newly made auction page
+    return redirect()->route('auctions', ['id' => $request->title]);
   }
 
   /**
@@ -117,7 +116,15 @@ class AuctionController extends Controller
   public function show($title)
   {
     $auction = Auction::where('title', $title)->first();
-    return view('auctions.detail')->with('auction', $auction);
+    
+    // check if this auction is already on the user's watchlist
+    $onWatchlist = false;
+    if (WatchlistItem::where([['userId', \Auth::id()],['auctionId', $auction->id]])->first())
+    {
+      $onWatchlist = true;
+    }
+
+    return view('auctions.detail')->with(['auction' => $auction, 'onWatchlist' => $onWatchlist]);
   }
 
   /**

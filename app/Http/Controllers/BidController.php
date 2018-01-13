@@ -43,10 +43,10 @@ class BidController extends Controller
   {
     $this->validate($request, [
       'amount' => 'required|integer',
-      'auctionid' => 'required|integer',
+      'auctionId' => 'required|integer',
     ]);
 
-    $auction = Auction::where('id', $request->auctionid)->first();
+    $auction = Auction::where('id', $request->auctionId)->first();
     // only allow bidding on active auctions
     if (!$auction->isActive())
     {
@@ -61,7 +61,7 @@ class BidController extends Controller
 
     Bid::create([
       'userId' => \Auth::id(),
-      'auctionId' => $request->auctionid,
+      'auctionId' => $request->auctionId,
       'amount' => $request->amount,
     ]);
 
