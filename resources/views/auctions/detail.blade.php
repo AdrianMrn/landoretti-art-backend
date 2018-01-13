@@ -65,7 +65,7 @@
                         <span>{{ $auction->year }}</span>
                     </div><hr>
                     <div class="row">
-                        <span class="auctiondetail-timeleft">{{ $auction->timeleft() }} left</span>
+                        <span class="auctiondetail-timeleft">{{ $auction->timeleft() }} {{ $auction->isActive() ? "left": "" }}</span>
                     </div>
                     <div class="row">
                         <span>{{ $auction->endDateFormatted() }}</span>
@@ -86,9 +86,9 @@
                             {{ csrf_field() }}
                             <input type="hidden" id="auctionId" name="auctionId" value="{{ $auction->id }}">
                             <div class="form-group">
-                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->amountOfBids() == 0 ? $auction->priceMinEst : $auction->highestBidAmount() + 5 }}" required>
+                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->amountOfBids() == 0 ? $auction->priceMinEst : $auction->highestBidAmount() + 5 }}" required {{ $auction->isActive() ? "": "disabled" }}>
                             </div>
-                            <button type="submit" class="btn">BID NOW ></button>
+                            <button type="submit" class="btn btn-default" {{ $auction->isActive() ? "": "disabled" }}>BID NOW ></button>
                         </form>
 
                         <button type="submit" class="btn-sm btn-default add-to-watchlist" form="toggle-watchlist">

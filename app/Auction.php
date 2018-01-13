@@ -60,7 +60,7 @@ class Auction extends Model
 
     public function isActive()
     {
-        if ($this->status == 'active')
+        if ($this->status == 'active' && strtotime($this->endDate) > Carbon::now()->timestamp)
         {
             return true;
         } else {

@@ -50,7 +50,7 @@ class BidController extends Controller
     // only allow bidding on active auctions
     if (!$auction->isActive())
     {
-      return back();
+      return back()->withErrors(['You can only bid on active auctions.']);
     }
 
     // check if bid is higher than current highest bid
@@ -115,6 +115,28 @@ class BidController extends Controller
   public function destroy($id)
   {
     
+  }
+
+  public function buyout($auctionId)
+  {
+    $auction = Auction::where('id', $auctionId)->first();
+    // only allow buying active auctions
+    if (!$auction->isActive())
+    {
+      return back()->withErrors(['You can only buy active auctions.']);
+    }
+
+    Bid::create([
+      'userId' => \Auth::id(),
+      'auctionId' => $auctionId,
+      'amount' => $auction->priceBuyout,
+    ]);
+
+    $auction->boughtBy = \Auth::id();
+    $auction->status = "sold";
+    $auction->save();
+
+    //future: redirect to thank you page
   }
   
 }
