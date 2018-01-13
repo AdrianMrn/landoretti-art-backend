@@ -44,14 +44,32 @@ class User extends Authenticatable
         return $this->hasMany('ISearch');
     }
 
-    public function watchlistItems()
+    public function watchlistItems($filters)
     {
-        $itemIds = $this->hasMany('App\WatchlistItem', 'userId')->get();
+        $items = $this->hasMany('App\WatchlistItem', 'userId')->get();
         $watchlistItems = [];
-        foreach ($itemIds as $item)
+
+        $itemIds = [];
+        foreach ($items as $item)
         {
-            array_push($watchlistItems, Auction::where('id', $item->auctionId)->first());
+            array_push($itemIds, $item->auctionId);
         }
+
+        $Auction = new Auction();
+        $query = $Auction->newQuery();
+
+        if ($filters['show'] != 'all')
+        {
+            if (sizeof($filters['show']) == 1)
+            {
+                $query->where('status', $filters['show']);
+            } else {
+                $query->whereIn('status', $filters['show']);
+            }
+        }
+
+        $watchlistItems = $query->find($itemIds);
+
         return $watchlistItems;
     }
 }

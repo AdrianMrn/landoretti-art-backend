@@ -59,6 +59,12 @@ class BidController extends Controller
       return back()->withErrors(['Your bid must be higher than the current highest bid.']);
     }
 
+    // check if bid is higher than the minimum price
+    if ($request->amount < $auction->priceMinEst)
+    {
+      return back()->withErrors(['Your bid cannot be lower than the minimum estimated price.']);
+    }
+
     Bid::create([
       'userId' => \Auth::id(),
       'auctionId' => $request->auctionId,

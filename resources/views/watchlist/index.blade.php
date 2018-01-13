@@ -17,7 +17,11 @@
     </form>
 
     <div class="row marginbelow">
-        <div class="col-md-6">filter buttons</div>
+        <div class="col-md-6 watchlist-filter">
+            <a href="{{ url('watchlist') }}?show=all">All</a>
+            <a href="{{ url('watchlist') }}?show=active">Active</a>
+            <a href="{{ url('watchlist') }}?show[]=sold&show[]=expired">Ended</a>
+        </div>
         <div class="col-md-6">
             <div class="pull-right">
                 <button type="submit" class="btn-sm btn-default pull-left" form="watchlist-form">DELETE SELECTED ></button>
@@ -45,8 +49,8 @@
                         @foreach ($watchlistItems as $item)
                         <tr>
                             <td><input class="form-check-input" type="checkbox" name="delete_items[]" value="{{ $item->id }}" id="{{ $item->id }}"></td>
-                            <td class="watchlist-image"><img src="{{ $item->imageArtwork }}" alt="{{ $item->title }}"></td>
-                            <td>{{ $item->title }}</td>
+                            <td class="watchlist-image"><a href="{{ url('auctions', [$item->title]) }}"><img src="{{ $item->imageArtwork }}" alt="{{ $item->title }}"></a></td>
+                            <td><p class="auctiontitle"><a href="{{ url('auctions', [$item->title]) }}">{{ $item->title }}</a></p><p class="auctionyear">{{ $item->year }}</p></td>
                             <td>{{ $item->priceMinEst }}</td>
                             <td>{{ $item->endDateFormatted() }}</td>
                             <td>{{ $item->timeleft() }}</td>

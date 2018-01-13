@@ -20,9 +20,11 @@ class WatchlistItemController extends Controller
    *
    * @return Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $watchlistItems = \Auth::user()->watchlistItems(); /* future: apply filter to this (active/ended) */
+    $filters = ['show' => $request->query('show', 'all')];
+
+    $watchlistItems = \Auth::user()->watchlistItems($filters);
 
     return view('watchlist.index', ['watchlistItems' => $watchlistItems]);
   }

@@ -104,7 +104,7 @@ class AuctionController extends Controller
       'imageOptional' => $imageOptionalUrl,
     ]);
 
-    return redirect()->route('auctions', ['id' => $request->title]);
+    return redirect()->url('auctions', ['id' => $request->title]);
   }
 
   /**

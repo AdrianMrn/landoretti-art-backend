@@ -39,10 +39,10 @@
                     <ul class="nav navbar-nav">
                         @guest
                         <li><a href="{{ route('register') }}">REGISTER</a></li>
-                        <!-- <li><a href="{{ route('login') }}">LOGIN</a></li> -->
 
                         <form method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
+                            <input class="login-checkbox" type="checkbox" name="remember" checked>
                             <div class="col-md-4 loginpadding">
                                 <input id="email" placeholder="user" type="email" class="form-control input-sm" name="email" value="{{ old('email') }}" required>
                             </div>

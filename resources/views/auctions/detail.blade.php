@@ -79,23 +79,25 @@
                         @if ($auction->priceBuyout)
                         <a href="#" >Buy now for €{{ $auction->priceBuyout }}</a> <!-- future: link to thank you page -->
                         @endif<br><br>
-                        <span class="pull-left">Current highest bid: {{$auction->highestBidAmount()}}</span>
+                        <span class="highest-bid">Current highest bid: {{$auction->highestBidAmount()}}</span>
                         <span>bids: {{ $auction->amountOfBids() }} </span> <!-- future: add amount of bids -->
                         
                         <form class="form-inline" method="POST" action="{{ url('bid') }}">
                             {{ csrf_field() }}
                             <input type="hidden" id="auctionId" name="auctionId" value="{{ $auction->id }}">
-                            <div class="form-group mb-2">
-                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->highestBidAmount() + 5 }}" required>
+                            <div class="form-group">
+                                <input id="amount" placeholder="amount" type="number" class="form-control" name="amount" value="{{ $auction->amountOfBids() == 0 ? $auction->priceMinEst : $auction->highestBidAmount() + 5 }}" required>
                             </div>
                             <button type="submit" class="btn">BID NOW ></button>
                         </form>
 
-                        @if (!$onWatchlist)
-                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">ADD TO WATCHLIST ></button>
-                        @else
-                        <button type="submit" class="btn-sm btn-default" form="toggle-watchlist">REMOVE FROM WATCHLIST ></button>
-                        @endif
+                        <button type="submit" class="btn-sm btn-default add-to-watchlist" form="toggle-watchlist">
+                            @if (!$onWatchlist)
+                            ADD TO WATCHLIST >
+                            @else
+                            REMOVE FROM WATCHLIST >
+                            @endif
+                        </button>
 
                     </div>
                 </div>

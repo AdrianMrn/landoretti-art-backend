@@ -46,6 +46,11 @@ class Auction extends Model
 
         $timeToEnd = $endTime - $currTime;
 
+        if ($timeToEnd < 0)
+        {
+            return $this->status;
+        }
+
         $m = floor(($timeToEnd%3600)/60);
         $h = floor(($timeToEnd%86400)/3600);
         $d = floor(($timeToEnd%2592000)/86400);
@@ -67,5 +72,4 @@ class Auction extends Model
     {
         return date('l jS \of F Y h:i:s A', strtotime($this->endDate));
     }
-
 }
