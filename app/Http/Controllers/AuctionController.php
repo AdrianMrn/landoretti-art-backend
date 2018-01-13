@@ -177,6 +177,11 @@ class AuctionController extends Controller
   {
     
   }
+
+  public function myAuctions()
+  {
+    return view('myauctions.index', ['auctions' => Auction::where('userId', \Auth::id())->get()]);
+  }
   
 }
 

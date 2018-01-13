@@ -28,3 +28,4 @@ Route::resource('bid', 'BidController');
 Route::resource('watchlist', 'WatchlistItemController');
 
 Route::post('/watchlist/clear', 'WatchlistItemController@clear')->name('clearWatchlist');
+Route::get('/myauctions', 'AuctionController@myAuctions')->name('myAuctions');

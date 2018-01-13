@@ -22,3 +22,9 @@ Breadcrumbs::register('watchlist', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Watchlist', url('watchlist'));
 });
+
+// Home > Watchlist
+Breadcrumbs::register('myauctions', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('My auctions', url('myauctions'));
+});

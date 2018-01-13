@@ -89,7 +89,7 @@
                         <li><a href="{{ url('auctions') }}">ART</a></li>
                         <li><a href="#">ISEARCH</a></li>
                         @if (Auth::check())
-                        <li><a href="#">MYAUCTIONS</a></li>
+                        <li><a href="{{ route('myAuctions') }}">MYAUCTIONS</a></li>
                         <li><a href="#">MYBIDS</a></li>
                         @endif
                         <li><a href="#">CONTACT</a></li>
