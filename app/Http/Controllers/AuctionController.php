@@ -22,27 +22,30 @@ class AuctionController extends Controller
    */
   public function index(Request $request)
   {
-    $query = $this->filterAuctions($request);
+    // filters
+    $filters = array(
+      'sortby' => $request->input('sortby', 'soonest'),
+      'price' => $request->input('price', 'any'),
+      'ending' => $request->input('ending', 'any'),
+      'era' => $request->input('era', 'any'),
+      'style' => $request->input('style', 'any'),
+    );
+
+    $query = $this->filterAuctions($filters);
     $auctions = $query->where('status', 'active')->paginate(8);
 
     $styles = Style::orderBy('name')->get();
 
-    return view('auctions.index', ['auctions' => $auctions, 'styles' => $styles]);
+    return view('auctions.index', ['auctions' => $auctions, 'styles' => $styles, 'filters' => $filters]);
   }
 
-  private function filterAuctions($request)
+  private function filterAuctions($filters)
   {
-    $sortby = $request->input('sortby', 'soonest');
-    $price = $request->input('price', 'any');
-    $ending = $request->input('ending', 'any');
-    $era = $request->input('era', 'any');
-    $style = $request->input('style', 'any');
-
     $Auction = new Auction();
     $query = $Auction->newQuery();
 
     // sortby
-    switch ($sortby)
+    switch ($filters['sortby'])
     {
       case "soonest":
         $query->orderBy('endDate', 'asc');
@@ -58,17 +61,17 @@ class AuctionController extends Controller
     }
     
     // price
-    if ($price == 'above')
+    if ($filters['price'] == 'above')
     {
       $query->where('priceMinEst', '>', 100000);
-    } elseif ($price != 'any')
+    } elseif ($filters['price'] != 'any')
     {
-      $values = explode('-', $price);
-      $query->whereBetween('priceMinEst', [(int)$values[0], (int)$values[1]]);
+      $values = explode('-', $filters['price']);
+      $query->whereBetween('priceMaxEst', [(int)$values[0], (int)$values[1]]);
     }
 
     // ending
-    switch ($ending)
+    switch ($filters['ending'])
     {
       case "today":
         $query->where('endDate',Carbon::now()->format('Y-m-d'));
@@ -82,7 +85,7 @@ class AuctionController extends Controller
     }
 
     // era
-    switch ($era)
+    switch ($filters['era'])
     {
       case 'lt-1940':
         $query->where('year', '<=', 1940);
@@ -99,9 +102,9 @@ class AuctionController extends Controller
     }
 
     // style
-    if ($style != 'any')
+    if ($filters['style'] != 'any')
     {
-      $query->where('style', $style);
+      $query->where('style', $filters['style']);
     }
 
     return $query;

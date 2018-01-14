@@ -18,8 +18,8 @@ ERD: http://laravelsd.com/5a523d13e520f
 
 - Filter auctions
     - X Set form submit on each label click (use jquery) 
-    - Set default filter options (frontend)
-    - Set old filter options (frontend)
+    - X Set default filter options (frontend)
+    - X Set old filter options (frontend)
     - X Write query builder for filters in AuctionController
 
 - 'style' field in auctions table should be styleId and point to the styles table.
