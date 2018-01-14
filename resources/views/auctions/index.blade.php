@@ -8,9 +8,16 @@
     {{ $auctions->links() }}
 @endsection
 
+@section('page-scripts')
+    <script>
+        $('#auctions-filter input').change(function() {$('form#auctions-filter').submit()});
+    </script>
+@endsection
+
 @section('auction-filter')
     <div class="container filters">
-        <form id="auctions-filter" method="POST" action="{{ url('auctions') }}">
+        <form id="auctions-filter" method="GET" action="{{ url('auctions') }}">
+            {{ csrf_field() }}
             <div class="row marginbelow">
                 <div class="col-md-8">
                     <ul class="sortby filter-head">
@@ -26,10 +33,6 @@
                         <li>
                             <input type='radio' value='newest' name='sortby' id='sortby-newest' hidden/>
                             <label for='sortby-newest'>newest first</label>
-                        </li> | 
-                        <li>
-                            <input type='radio' value='popular' name='sortby' id='sortby-popular' hidden/>
-                            <label for='sortby-popular'>popular auctions</label>
                         </li>
                     </ul>
                 </div>
@@ -69,6 +72,8 @@
                         </li>
                     </ul>
 
+                </div>
+                <div class="col-md-3">
                     <span class="filter-head">Ending</span>
                     <ul>
                         <li>
@@ -77,15 +82,15 @@
                         </li>
                         <li>
                             <input type='radio' value='today' name='ending' id='ending-today' hidden/>
-                            <label for='ending-today'>Ending today</label>
+                            <label for='ending-today'>Today</label>
                         </li>
                         <li>
-                            <input type='radio' value='this-week' name='ending' id='ending-this-week' hidden/>
-                            <label for='ending-this-week'>Ending this week</label>
+                            <input type='radio' value='week' name='ending' id='ending-this-week' hidden/>
+                            <label for='ending-this-week'>This week</label>
                         </li>
                         <li>
                             <input type='radio' value='month' name='ending' id='ending-this-month' hidden/>
-                            <label for='ending-this-month'>Ending this month</label>
+                            <label for='ending-this-month'>This month</label>
                         </li>
                     </ul>
                 </div>

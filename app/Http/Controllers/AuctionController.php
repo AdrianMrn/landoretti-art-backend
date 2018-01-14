@@ -20,13 +20,91 @@ class AuctionController extends Controller
    *
    * @return Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $auctions = Auction::where('status', 'active')->orderBy('created_at')->paginate(8);
+    $query = $this->filterAuctions($request);
+    $auctions = $query->where('status', 'active')->paginate(8);
 
     $styles = Style::orderBy('name')->get();
 
     return view('auctions.index', ['auctions' => $auctions, 'styles' => $styles]);
+  }
+
+  private function filterAuctions($request)
+  {
+    $sortby = $request->input('sortby', 'soonest');
+    $price = $request->input('price', 'any');
+    $ending = $request->input('ending', 'any');
+    $era = $request->input('era', 'any');
+    $style = $request->input('style', 'any');
+
+    $Auction = new Auction();
+    $query = $Auction->newQuery();
+
+    // sortby
+    switch ($sortby)
+    {
+      case "soonest":
+        $query->orderBy('endDate', 'asc');
+        break;
+      case "latest":
+        $query->orderBy('endDate', 'desc');
+        break;
+      case "newest":
+        $query->orderBy('created_at', 'asc');
+        break;
+      default:
+        $query->orderBy('endDate', 'asc');
+    }
+    
+    // price
+    if ($price == 'above')
+    {
+      $query->where('priceMinEst', '>', 100000);
+    } elseif ($price != 'any')
+    {
+      $values = explode('-', $price);
+      $query->whereBetween('priceMinEst', [(int)$values[0], (int)$values[1]]);
+    }
+
+    // ending
+    switch ($ending)
+    {
+      case "today":
+        $query->where('endDate',Carbon::now()->format('Y-m-d'));
+        break;
+      case "week":
+        $query->where('endDate','<',Carbon::now()->addWeek()->format('Y-m-d'));
+        break;
+      case "month":
+        $query->where('endDate','<',Carbon::now()->addMonth()->format('Y-m-d'));
+        break;
+    }
+
+    // era
+    switch ($era)
+    {
+      case 'lt-1940':
+        $query->where('year', '<=', 1940);
+        break;
+      case '1940-1960':
+        $query->whereBetween('year', [1940, 1960]);
+        break;
+      case '1960-1990':
+      $query->whereBetween('year', [1960, 1990]);
+        break;
+      case '1990-now':
+        $query->where('year', '>=', 1990);
+        break;
+    }
+
+    // style
+    if ($style != 'any')
+    {
+      $query->where('style', $style);
+    }
+
+    return $query;
   }
 
   /**
