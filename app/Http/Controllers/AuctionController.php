@@ -24,7 +24,9 @@ class AuctionController extends Controller
   {
     $auctions = Auction::where('status', 'active')->orderBy('created_at')->paginate(8);
 
-    return view('auctions.index', ['auctions' => $auctions]);
+    $styles = Style::orderBy('name')->get();
+
+    return view('auctions.index', ['auctions' => $auctions, 'styles' => $styles]);
   }
 
   /**
@@ -35,7 +37,8 @@ class AuctionController extends Controller
   public function create()
   {
     $styles = Style::orderBy('name')->get();
-    return view('auctions.create')->with('styles', $styles);
+
+    return view('auctions.create', ['styles' => $styles]);
   }
 
   /**
@@ -137,12 +140,12 @@ class AuctionController extends Controller
     
     // check if this auction is already on the user's watchlist
     $onWatchlist = false;
-    if (WatchlistItem::where([['userId', \Auth::id()],['auctionId', $auction->id]])->first())
+    if (\Auth::check() && WatchlistItem::where([['userId', \Auth::id()],['auctionId', $auction->id]])->first())
     {
       $onWatchlist = true;
     }
 
-    return view('auctions.detail')->with(['auction' => $auction, 'onWatchlist' => $onWatchlist]);
+    return view('auctions.detail', ['auction' => $auction, 'onWatchlist' => $onWatchlist]);
   }
 
   /**

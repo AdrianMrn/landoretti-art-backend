@@ -28,6 +28,10 @@
     margin-bottom: 10px;
 }
 
+.marginabove {
+    margin-top: 20px;
+}
+
 .marginleft {
     margin-left: 10px;
 }
@@ -214,4 +218,32 @@ h2 {
 .watchlist-filter a {
     margin-right: 5px;
     margin-top: 10px;
+}
+
+.filters {
+    padding-top: 20px;
+}
+
+.filter-head {
+    font-weight: bold;
+}
+
+.filters ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.sortby li {
+    display: inline-block;
+}
+
+.filters label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+}
+
+.filters input:checked + label {
+    text-decoration: underline;
+    font-weight: bold;
 }

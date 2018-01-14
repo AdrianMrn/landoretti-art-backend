@@ -106,6 +106,7 @@
                 </div>
             </div>
         </nav>
+        @yield('auction-filter');
         <div class="container">
             <div class="row marginbelow">
                 <div class="col-md-6">
