@@ -1,0 +1,1 @@
+The auction "{{ $auctionTitle }}" has ended

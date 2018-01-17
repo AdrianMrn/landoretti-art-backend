@@ -13,8 +13,8 @@ ERD: http://laravelsd.com/5a523d13e520f
     - ...?
 
 - Localization
-    - https://laravel.com/docs/5.5/localization
-    - Text as well as title, ...
+    - X https://laravel.com/docs/5.5/localization
+    - X Text as well as title, ...
 
 - Filter auctions
     - X Set form submit on each label click (use jquery) 
@@ -24,6 +24,10 @@ ERD: http://laravelsd.com/5a523d13e520f
 
 - 'style' field in auctions table should be styleId and point to the styles table.
 
-- Auction end (mail to everyone who bid & set status to expired/sold)
+- Auction end (mail to everyone who bid & set status to expired or sold)
 
-- Thank you page
+- Auction sale
+    - Thank you page
+    - Mail to everyone who bid & set status to sold
+
+- Deploy to C9

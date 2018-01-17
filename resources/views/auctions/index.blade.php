@@ -154,7 +154,7 @@
 
             @foreach ($auctions as $auction)
                 <div class="auctionlist smallitem">
-                    <div class="auctionlist-image" title="$auction->title" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
+                    <div class="auctionlist-image" title="{{$auction->title}}" style="background-image: url('{{ asset($auction->imageArtwork) }}');"></div>
                     <div class="auctionlist-info">
                         <p class="auctionyear">{{ $auction->year }}</p>
                         <p class="auctiontitle">{{ $auction->title }}</p>

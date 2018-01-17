@@ -12,5 +12,7 @@ return [
     'mybids' => 'MIJNBIEDINGEN',
 
     'search' => 'ZOEK',
-    
+
+    'profile' => 'PROFIEL',
+    'logout' => 'UITLOGGEN',
 ];

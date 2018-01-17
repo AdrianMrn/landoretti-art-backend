@@ -38,6 +38,17 @@ class Auction extends Model
     {
         return $this->hasMany('Bid');
     }
+    public function auctionWinner()
+    {
+        $highestBid = $this->hasMany('App\Bid', 'auctionId')->max('amount');
+        $winningBid = $this->hasMany('App\Bid', 'auctionId')->where('amount', $highestBid)->first();
+        return $winningBid;
+    }
+    public function auctionParticipants()
+    {
+        $allBids = $this->hasMany('App\Bid', 'auctionId')->get();
+        return $allBids;
+    }
 
     public function timeleft()
     {
@@ -76,5 +87,5 @@ class Auction extends Model
     public function estimatedPrice()
     {
         return (($this->priceMinEst + $this->priceMaxEst)/2);
-    }  
+    }
 }

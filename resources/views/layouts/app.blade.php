@@ -56,12 +56,12 @@
 
                         @else
                         <li><a href="{{ url('watchlist') }}">WATCHLIST</a></li>
-                        <li><a href="#">PROFILE</a></li>
+                        <li><a href="#">{{ __('messages.profile') }}</a></li>
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                LOGOUT
+                                {{ __('messages.logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

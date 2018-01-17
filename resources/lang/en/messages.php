@@ -12,5 +12,7 @@ return [
     'mybids' => 'MYBIDS',
 
     'search' => 'SEARCH',
-    
+
+    'profile' => 'PROFILE',
+    'logout' => 'LOGOUT',
 ];

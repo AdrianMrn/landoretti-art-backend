@@ -36,7 +36,7 @@ class AuctionController extends Controller
 
     $styles = Style::orderBy('name')->get();
 
-    return view('auctions.index', ['auctions' => $auctions, 'styles' => $styles, 'filters' => $filters]);
+    return view('auctions.index', ['title' => __('messages.art'), 'auctions' => $auctions, 'styles' => $styles, 'filters' => $filters]);
   }
 
   private function filterAuctions($filters)
