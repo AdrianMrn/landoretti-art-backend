@@ -52,7 +52,6 @@ class BidController extends Controller
     {
       return back()->withErrors(['You can only bid on active auctions.']);
     }
-
     // check if bid is higher than current highest bid
     if ($request->amount < $auction->highestBidAmount())
     {
@@ -62,6 +61,11 @@ class BidController extends Controller
     if ($request->amount < $auction->priceMinEst)
     {
       return back()->withErrors(['Your bid cannot be lower than the minimum estimated price.']);
+    }
+    // check if the bid isn't higher than the buyout
+    if ($request->amount > $auction->priceBuyout)
+    {
+      return back()->withErrors(['Your bid is higher than the buyout price, please press the "buy now" button.']);
     }
 
     Bid::create([

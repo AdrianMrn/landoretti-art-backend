@@ -77,7 +77,7 @@
                         <span>Estimated price:</span><br>
                         <span>€{{ $auction->priceMinEst }} - €{{ $auction->priceMaxEst }}</span><br>
                         @if ($auction->priceBuyout)
-                        <a href="#" >Buy now for €{{ $auction->priceBuyout }}</a> <!-- future: link to thank you page -->
+                        <a href="{{ route('buynow', ['id' => $auction->id]) }}">Buy now for €{{ $auction->priceBuyout }}</a> <!-- future: link to thank you page -->
                         @endif<br><br>
                         <span class="highest-bid">Current highest bid: {{$auction->highestBidAmount()}}</span>
                         <span>bids: {{ $auction->amountOfBids() }} </span> <!-- future: add amount of bids -->

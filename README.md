@@ -4,7 +4,7 @@ ERD: http://laravelsd.com/5a523d13e520f
 
 # TODO:
 - SEO
-    - Titles
+    - X Titles
     - Google Analytics
     - ... ?
 
@@ -22,12 +22,14 @@ ERD: http://laravelsd.com/5a523d13e520f
     - X Set old filter options (frontend)
     - X Write query builder for filters in AuctionController
 
-- 'style' field in auctions table should be styleId and point to the styles table.
-
-- Auction end (mail to everyone who bid & set status to expired or sold)
+- X Auction end (mail to everyone who bid & set status to expired or sold)
 
 - Auction sale
     - Thank you page
     - Mail to everyone who bid & set status to sold
 
 - Deploy to C9
+
+- cronjob for schedule
+
+- Deploy doc

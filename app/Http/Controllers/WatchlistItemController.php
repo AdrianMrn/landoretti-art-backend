@@ -26,7 +26,7 @@ class WatchlistItemController extends Controller
 
     $watchlistItems = \Auth::user()->watchlistItems($filters);
 
-    return view('watchlist.index', ['watchlistItems' => $watchlistItems]);
+    return view('watchlist.index', ['title' => 'watchlist', 'watchlistItems' => $watchlistItems]);
   }
 
   /**

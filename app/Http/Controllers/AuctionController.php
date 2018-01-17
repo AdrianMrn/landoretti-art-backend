@@ -110,6 +110,22 @@ class AuctionController extends Controller
     return $query;
   }
 
+  public function buyNow($id)
+  {
+    $auction = Auction::where('id', $id)->first();
+    // only allow buying active auctions
+    if (!$auction->isActive())
+    {
+      return back()->withErrors(['You can only bid on active auctions.']);
+    }
+
+    $auction->status = "sold";
+    $auction->boughtBy = \Auth::id();
+    $auction->save();
+
+    return view('auctions.thankyou', ['title' => 'thank you']);
+  }
+
   /**
    * Show the form for creating a new resource.
    *
@@ -119,7 +135,7 @@ class AuctionController extends Controller
   {
     $styles = Style::orderBy('name')->get();
 
-    return view('auctions.create', ['styles' => $styles]);
+    return view('auctions.create', ['title' => 'create auction', 'styles' => $styles]);
   }
 
   /**
@@ -226,7 +242,7 @@ class AuctionController extends Controller
       $onWatchlist = true;
     }
 
-    return view('auctions.detail', ['auction' => $auction, 'onWatchlist' => $onWatchlist]);
+    return view('auctions.detail', ['title' => $auction->title, 'auction' => $auction, 'onWatchlist' => $onWatchlist]);
   }
 
   /**
@@ -264,7 +280,7 @@ class AuctionController extends Controller
 
   public function myAuctions()
   {
-    return view('myauctions.index', ['auctions' => Auction::where('userId', \Auth::id())->get()]);
+    return view('myauctions.index', ['title' => 'my auctions', 'auctions' => Auction::where('userId', \Auth::id())->get()]);
   }
   
 }

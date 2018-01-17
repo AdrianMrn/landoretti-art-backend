@@ -51,8 +51,6 @@ class checkauctions extends Command
                 $this->endOfAuction($auction);
             }
         }
-        $this->endOfAuction(Auction::where('id', 11)->first());
-
 
         echo "\nCheck auctions finished\n";
     }
@@ -68,18 +66,22 @@ class checkauctions extends Command
             $auction->save();
         } else
         {
+            // mail to auction winner (highest bid)
             $winningBid = $auctionObject->auctionWinner();
             $winner = User::where('id', $winningBid->userId)->first();
 
             Mail::to($winner)->send(new \App\Mail\AuctionWon($auction));
             
+            // mails to auction losers (all other bids)
             $allBids = $auctionObject->auctionParticipants();
             $sendto = [];
+            $sendtoIds = [];
             foreach ($allBids as $bid)
             {
-                if ($bid->userId != $winningBid->userId)
+                if ($bid->userId != $winningBid->userId && !in_array($bid->userId, $sendtoIds))
                 {
                     array_push($sendto, User::where('id', $bid->userId)->first());
+                    array_push($sendtoIds, $bid->userId);
                 }
             }
             if (sizeof($sendto))
