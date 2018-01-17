@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Landoretti Art</title>
+    <title>Landoretti Art {{ isset($title) ? "- $title":"" }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -38,7 +38,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @guest
-                        <li><a href="{{ route('register') }}">REGISTER</a></li>
+                        <li><a href="{{ route('register') }}">{{ __('messages.register') }}</a></li>
 
                         <form method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
@@ -77,7 +77,7 @@
                         <li>
                             <input class="form-control input-sm" placeholder="Search" id="searchinput" type="text">
                         </li>
-                        <li><a href="#">SEARCH</a></li> <!-- future: magnifying glass -->
+                        <li><a href="#">{{ __('messages.search') }}</a></li> <!-- future: magnifying glass -->
                     </ul>
                 </div>
 
@@ -85,12 +85,12 @@
                 <div class="collapse navbar-collapse navbar-bot" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('home') }}">HOME</a></li>
-                        <li><a href="{{ url('auctions') }}">ART</a></li>
-                        <li><a href="#">ISEARCH</a></li>
+                        <li><a href="{{ route('home') }}">{{ __('messages.home') }}</a></li>
+                        <li><a href="{{ url('auctions') }}">{{ __('messages.art') }}</a></li>
+                        <li><a href="#">{{ __('messages.isearch') }}</a></li>
                         @if (Auth::check())
-                        <li><a href="{{ route('myAuctions') }}">MYAUCTIONS</a></li>
-                        <li><a href="#">MYBIDS</a></li>
+                        <li><a href="{{ route('myAuctions') }}">{{ __('messages.myauctions') }}</a></li>
+                        <li><a href="#">{{ __('messages.mybids') }}</a></li>
                         @endif
                         <li><a href="#">CONTACT</a></li>
                         &nbsp;
@@ -99,9 +99,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Language Settings -->
-                        <li><a href="#">NL</a></li>
-                        <li><a href="#">FR</a></li>
-                        <li><a href="#">EN</a></li>
+                        <li><a href="{{ LaravelLocalization::getLocalizedURL('nl', null, [], true) }}">NL</a></li>
+                        <li><a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">EN</a></li>
                     </ul>
                 </div>
             </div>
