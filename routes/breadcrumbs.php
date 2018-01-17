@@ -28,3 +28,9 @@ Breadcrumbs::register('myauctions', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('My auctions', url('myauctions'));
 });
+
+// Home > Watchlist
+Breadcrumbs::register('thankyou', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Thank you', url('thankyou'));
+});

@@ -25,5 +25,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::post('/watchlist/clear', 'WatchlistItemController@clear')->name('clearWatchlist');
     Route::get('/myauctions', 'AuctionController@myAuctions')->name('myAuctions');
 
-    Route::get('/buyacount/{id}', 'AuctionController@buyNow')->name('buynow');
+    Route::get('/buyauction/{id}', 'AuctionController@buyNow')->name('buynow');
 });
