@@ -2,34 +2,18 @@
 
 ERD: http://laravelsd.com/5a523d13e520f
 
-# TODO:
-- SEO
-    - X Titles
-    - Google Analytics
-    - ... ?
+# How to deploy
 
-- Performance
-    - CDN?
-    - ...?
+Requirements: 
+    - ssh access to your webserver running an Apache/nginx/... web server and php7.0 installed
+    - MySQL server
 
-- Localization
-    - X https://laravel.com/docs/5.5/localization
-    - X Text as well as title, ...
+1. `git clone` this entire repository onto your server, point your domain to the proper route (/public), use your .htaccess file or your Apache config for this
 
-- Filter auctions
-    - X Set form submit on each label click (use jquery) 
-    - X Set default filter options (frontend)
-    - X Set old filter options (frontend)
-    - X Write query builder for filters in AuctionController
+2. Run `composer update` in the root folder of the project (get composer.phar if you don't have composer installed on your machine)
 
-- X Auction end (mail to everyone who bid & set status to expired or sold)
+3. Copy and rename the .env.example file to .env and fill in the database and mailgun settings, generate a Laravel app key using `php artisan key:generate`
 
-- Auction sale
-    - Thank you page
-    - Mail to everyone who bid & set status to sold
+4. Run `php artisan migrate` to create the tables in your database
 
-- Deploy to C9
-
-- cronjob for schedule
-
-- Deploy doc
+5. Create a cronjob `* * * * * php [projectroot]/artisan schedule:run >> /dev/null 2>&1`

@@ -15,6 +15,7 @@
 
     <div class="row marginbelow">
         <div class="col-md-12">
+            <button onclick="location.href = '{{ url('auctions/create') }}';" class="btn btn-default pull-right">CREATE NEW ></button>
             <h4>Active</h4>
             <table class="table table-bordered">
                 <thead class="thead-light">

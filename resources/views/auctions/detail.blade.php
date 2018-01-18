@@ -82,7 +82,7 @@
                         <span class="highest-bid">Current highest bid: {{$auction->highestBidAmount()}}</span>
                         <span>bids: {{ $auction->amountOfBids() }} </span> <!-- future: add amount of bids -->
                         
-                        <form class="form-inline" method="POST" action="{{ url('bid') }}">
+                        <form class="form-inline" method="POST" action="{{ route('bid.store') }}">
                             {{ csrf_field() }}
                             <input type="hidden" id="auctionId" name="auctionId" value="{{ $auction->id }}">
                             <div class="form-group">

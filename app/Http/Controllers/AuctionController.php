@@ -145,6 +145,7 @@ class AuctionController extends Controller
    */
   public function store(Request $request)
   {
+    dd($request);
     $this->validate($request, [
       'style' => 'required|string|max:255',
       'title' => 'required|string|max:255|unique:auctions',
@@ -221,6 +222,8 @@ class AuctionController extends Controller
       'imageArtwork' => 'uploads/' . $imageArtworkTitle,
       'imageOptional' => $imageOptionalUrl,
     ]);
+
+    return back()->withErrors(['nice'])->withInput();
 
     return redirect()->route('auctions.show', ['title' => $request->title]);
   }

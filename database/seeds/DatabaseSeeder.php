@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Style;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $style = new Style;
+        
+        $style->name = 'Modern';
+        
+        $style->save();
     }
 }
