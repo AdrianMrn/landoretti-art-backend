@@ -8,6 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+
     <title>Landoretti Art {{ isset($title) ? "- $title":"" }}</title>
 
     <!-- Styles -->
