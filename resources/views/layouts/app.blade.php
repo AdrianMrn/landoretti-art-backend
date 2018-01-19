@@ -11,7 +11,7 @@
     <title>Landoretti Art {{ isset($title) ? "- $title":"" }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('storage/images/landoretti_logo.png') }}" class="logo">
+                        <img src="{{ secure_asset('storage/images/landoretti_logo.png') }}" class="logo">
                     </a>
                 </div>
 
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
     @yield('page-scripts')
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112690615-1"></script>
